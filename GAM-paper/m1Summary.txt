@@ -1,0 +1,33 @@
+
+Family: gaussian 
+Link function: identity 
+
+Formula:
+net ~ PV + load24 + s(hour_of_day, bs = "cc", k = 23) + s(hour_of_day, 
+    by = PV, bs = "cc", k = 23) + s(month, bs = "cc", k = 11) + 
+    s(month, by = PV, bs = "cc", k = 11) + ti(hour_of_day, month, 
+    k = c(23, 11)) + ti(hour_of_day, month, by = PV, k = c(23, 
+    11)) + s(hour_of_day, EAN, bs = "fs", k = 23, m = 1)
+
+Parametric coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.0763992  0.0030383   25.14   <2e-16 ***
+PV.L        -0.0543035  0.0042914  -12.65   <2e-16 ***
+load24       0.1500066  0.0001792  837.01   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Approximate significance of smooth terms:
+                                   edf  Ref.df        F p-value    
+s(hour_of_day)                  19.087    21.0    93.26  <2e-16 ***
+s(hour_of_day):PVTRUE           19.112    21.0   239.40  <2e-16 ***
+s(month)                         8.957     9.0  3182.85  <2e-16 ***
+s(month):PVTRUE                  8.972     9.0 11765.90  <2e-16 ***
+ti(month,hour_of_day)          209.538   218.5   107.52  <2e-16 ***
+ti(month,hour_of_day):PVTRUE   208.705   218.1   582.32  <2e-16 ***
+s(hour_of_day,EAN)           14919.779 16099.0   134.17  <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+R-sq.(adj) =   0.46   Deviance explained = 46.1%
+fREML = -1.6589e+07  Scale est. = 0.034943  n = 30124661
